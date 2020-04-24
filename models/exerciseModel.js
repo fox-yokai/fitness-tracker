@@ -27,7 +27,7 @@ const ExerciseSchema = new Schema({
         type: Number,
       },
     resistanceDuration: {
-        type:Number,
+        type: Number,
     }
 });
 
