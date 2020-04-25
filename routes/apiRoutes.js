@@ -1,4 +1,4 @@
-const Exercise = require('../models/exerciseModel');
+// const Exercise = require('../models/exerciseModel');
 const Workout = require('../models/workoutModel');
 const express = require('express');
 const router = express.Router();
@@ -17,7 +17,8 @@ router.post("/api/workouts", (req, res) => {
 
 // add exercise
 router.put("/api/workouts/:id", ({ body, params }, res) => {
-    Workout.findByIdAndUpdate(params.id,
+    Workout.findByIdAndUpdate(
+        params.id,
         {
             $push: {exercises: body}
         },
@@ -45,13 +46,16 @@ router.get('/api/workouts', function (req, res){
         })
     });
 
-
-
-
-
-
-
 // getworkouts in range
+router.get('/api/workouts/range', function (req, res){
+    Workout.find({ day: { $gte: new Date(new Date() - 7 * 60 * 60 * 24 * 1000) }})
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => {
+            res.json(err)
+        })
+    });
 
 
 
